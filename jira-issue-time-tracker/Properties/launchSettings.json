@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "jira-issue-time-tracker": {
+      "commandName": "Project",
+      "commandLineArgs": "start SCRUM-1"
+    }
+  }
+}
