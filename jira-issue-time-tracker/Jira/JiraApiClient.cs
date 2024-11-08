@@ -12,12 +12,13 @@ namespace jira_issue_time_tracker.Jira
     {
         public async Task PostWorklogAsync(string issueKey, Models.Worklog worklog)
         {
-            using StringContent jsonContent = new(
-                JsonSerializer.Serialize(worklog),
-                Encoding.UTF8,
-                "application/json");
+            using StringContent jsonContent =
+                new(JsonSerializer.Serialize(worklog), Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync($"rest/api/3/issue/{issueKey}/worklog", jsonContent);
+            var response = await httpClient.PostAsync(
+                $"rest/api/3/issue/{issueKey}/worklog",
+                jsonContent
+            );
 
             response.EnsureSuccessStatusCode();
         }

@@ -1,7 +1,7 @@
-﻿using jira_issue_time_tracker.Services;
+﻿using System.ComponentModel;
+using jira_issue_time_tracker.Services;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System.ComponentModel;
 
 namespace jira_issue_time_tracker.Commands
 {
@@ -30,34 +30,42 @@ namespace jira_issue_time_tracker.Commands
 
         private async Task GetIssueExample(string issueKey)
         {
-            AnsiConsole.MarkupInterpolated($"[blue]Start tracking time for issue [/] -> [green]{issueKey}[/]\n");
+            AnsiConsole.MarkupInterpolated(
+                $"[blue]Start tracking time for issue [/] -> [green]{issueKey}[/]\n"
+            );
 
-            await AnsiConsole.Status()
-                .StartAsync("Trying to update issue...", async ctx =>
-                {
-                    try
+            await AnsiConsole
+                .Status()
+                .StartAsync(
+                    "Trying to update issue...",
+                    async ctx =>
                     {
-                        await _jiraIssueService.UpdateWorklogAsync(issueKey, new Jira.Models.Worklog()
+                        try
                         {
-                            TimeSpentSeconds = 12000,
-                        });
+                            await _jiraIssueService.UpdateWorklogAsync(
+                                issueKey,
+                                new Jira.Models.Worklog() { TimeSpentSeconds = 12000 }
+                            );
 
-                        AnsiConsole.Write(
-                          new Panel(new Text("Updated!")) { Expand = true }
-                              .Header("Did it work?")
-                              .RoundedBorder()
-                              .BorderColor(Color.Green));
+                            AnsiConsole.Write(
+                                new Panel(new Text("Updated!")) { Expand = true }
+                                    .Header("Did it work?")
+                                    .RoundedBorder()
+                                    .BorderColor(Color.Green)
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            // TODO write log
+                            AnsiConsole.Write(
+                                new Panel(ex.GetRenderable()) { Expand = true }
+                                    .Header("ERROR")
+                                    .RoundedBorder()
+                                    .BorderColor(Color.Red)
+                            );
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        // TODO write log
-                        AnsiConsole.Write(
-                            new Panel(ex.GetRenderable()) { Expand =  true }
-                                .Header("ERROR")
-                                .RoundedBorder()
-                                .BorderColor(Color.Red));
-                    }
-                });
+                );
         }
     }
 }
