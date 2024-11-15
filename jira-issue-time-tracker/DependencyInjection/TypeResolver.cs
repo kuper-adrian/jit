@@ -2,23 +2,14 @@
 
 namespace jira_issue_time_tracker.DependencyInjection
 {
-    internal class TypeResolver : ITypeResolver, IDisposable
+    internal class TypeResolver(IServiceProvider provider) : ITypeResolver, IDisposable
     {
-        private readonly IServiceProvider _provider;
+        private readonly IServiceProvider _provider =
+            provider ?? throw new ArgumentNullException(nameof(provider));
 
-        public TypeResolver(IServiceProvider provider)
+        public object? Resolve(Type? type)
         {
-            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
-        }
-
-        public object Resolve(Type type)
-        {
-            if (type == null)
-            {
-                return null;
-            }
-
-            return _provider.GetService(type);
+            return type == null ? null : _provider.GetService(type);
         }
 
         public void Dispose()
