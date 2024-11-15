@@ -20,7 +20,7 @@ namespace jira_issue_time_tracker
                 DotNetEnv.Env.TraversePath().Load();
                 var configuration = new ConfigurationBuilder().AddEnvironmentVariables().Build();
 
-                client.BaseAddress = new Uri(uriString: configuration["BASE_URL"]);
+                client.BaseAddress = new Uri(uriString: configuration["BASE_URL"] ?? string.Empty);
 
                 var userMail = configuration["USER_MAIL"];
                 var apiToken = configuration["API_TOKEN"];
