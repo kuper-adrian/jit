@@ -6,6 +6,7 @@ using Spectre.Console.Cli;
 
 namespace jira_issue_time_tracker.Commands
 {
+    [Description("Start tracking time for an issue.")]
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class StartCommand(IJiraIssueService jiraIssueService)
         : AsyncCommand<StartCommand.Settings>

@@ -7,6 +7,7 @@ using static jira_issue_time_tracker.Services.JiraIssueService;
 
 namespace jira_issue_time_tracker.Commands
 {
+    [Description("Stop tracking time for an issue.")]
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class StopCommand(IJiraIssueService jiraIssueService)
         : AsyncCommand<StopCommand.Settings>
