@@ -39,5 +39,5 @@ COMMANDS:
 ## Changelog
 TODO
 
-## Licence
-TODO
+## License
+MIT
