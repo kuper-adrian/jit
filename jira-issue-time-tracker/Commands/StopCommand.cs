@@ -90,7 +90,7 @@ namespace jira_issue_time_tracker.Commands
         private async Task UpdateIssueAsync(TrackedIssue issue, Settings settings)
         {
             // minimum time to log is one minute
-            var elapsedTimeSeconds = issue.ElapsedTime.Seconds;
+            var elapsedTimeSeconds = (int)Math.Round(issue.ElapsedTime.TotalSeconds);
             if (elapsedTimeSeconds < 60)
             {
                 elapsedTimeSeconds = 60;
