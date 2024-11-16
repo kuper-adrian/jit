@@ -1,10 +1,12 @@
-﻿using Humanizer;
+﻿using System.ComponentModel;
+using Humanizer;
 using jira_issue_time_tracker.Services;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace jira_issue_time_tracker.Commands
 {
+    [Description("Display status information about tracked issues.")]
     // ReSharper disable once ClassNeverInstantiated.Global
     internal class StatusCommand(IJiraIssueService jiraIssueService)
         : AsyncCommand<StatusCommand.Settings>
