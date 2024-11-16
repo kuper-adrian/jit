@@ -15,7 +15,7 @@ dotnet build # check bin folder for executable
 In order to authenticate against the Jira API you have to create an API Token as explained 
 [here](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/). Then, 
 inside the folder of the JIT executable, create a `.env` file with the following content:
-```
+```dotenv
 BASE_URL=<PASTE BASE URL OF YOUR JIRA INSTANCE>
 USER_MAIL=<PASTE MAIL ADRESS OF YOUR JIRA ACCOUNT>
 API_TOKEN=<PASTE API TOKEN CREATED EARLIER>
