@@ -5,6 +5,7 @@ using jira_issue_time_tracker.Jira;
 using jira_issue_time_tracker.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace jira_issue_time_tracker
@@ -42,6 +43,10 @@ namespace jira_issue_time_tracker
                 config.AddCommand<StartCommand>("start");
                 config.AddCommand<StopCommand>("stop");
                 config.AddCommand<StatusCommand>("status");
+
+                config.UseAssemblyInformationalVersion();
+
+                config.SetApplicationName("jit");
             });
 
             await app.RunAsync(args);
