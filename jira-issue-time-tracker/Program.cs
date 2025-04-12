@@ -40,13 +40,20 @@ namespace jira_issue_time_tracker
             var app = new CommandApp(registrar);
             app.Configure(config =>
             {
+                config.SetApplicationName("jit");
+                config.UseAssemblyInformationalVersion();
+
                 config.AddCommand<StartCommand>("start");
                 config.AddCommand<StopCommand>("stop");
                 config.AddCommand<StatusCommand>("status");
 
-                config.UseAssemblyInformationalVersion();
-
-                config.SetApplicationName("jit");
+                config.SetExceptionHandler(
+                    (ex, resolver) =>
+                    {
+                        AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
+                        return -99;
+                    }
+                );
             });
 
             await app.RunAsync(args);
