@@ -28,7 +28,7 @@ namespace jira_issue_time_tracker.Services
         }
 
         private readonly string _trackedIssuesFileLocation = Path.Combine(
-            Directory.GetCurrentDirectory(),
+            AppDomain.CurrentDomain.BaseDirectory,
             ".jit"
         );
 
